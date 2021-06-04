@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
-
+import {Button} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export type TaskType = {
     id: string
@@ -16,33 +17,40 @@ type TodoPropsType = {
 
 export const Todo = (props: TodoPropsType) => {
 
+    // Локальный Стейт названия тасок
     const [taskTitle, setTaskTitle] = useState('')
 
+    // Функция сохранения title  из инпута в Локальный Стейт
     const onChangeTaskTitle = (event: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value)
     }
-
+    // Функция добавление таски и затирание инпута после добавления
     const addTask = () => {
         props.addTask(taskTitle)
         setTaskTitle('')
     }
-
+    // Функция добавления таски с помощью клавиши Enter
     const onKeyPressAddTask = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") addTask()
     }
 
     return <div>
-        <h1>{props.title}</h1>
+        <div>
+            <h1>{props.title}</h1>
 
-        <input
-            placeholder={'enter some text'}
-            value={taskTitle}
-            onChange={onChangeTaskTitle}
-            onKeyPress={onKeyPressAddTask}
-        />
+            <input className="col-form-label-sm"
+                   placeholder={'task title'}
+                   value={taskTitle}
+                   onChange={onChangeTaskTitle}
+                   onKeyPress={onKeyPressAddTask}
+            />
 
-        <button onClick={addTask}>+</button>
+            <Button
+                className="btn btn-outline-success" type="button"
+                onClick={addTask}>ADD</Button>
+        </div>
         <ul>
+            {/*Мапом создаем новый массив тасок и возвращием в виде title и кнопки удалить*/}
             {
                 props.tasks.map(t => {
                     return <li key={t.id}>
@@ -50,11 +58,12 @@ export const Todo = (props: TodoPropsType) => {
                         // props.changeTaskStatus(t.isDone)
                     }
                     }>{t.title}</span>
-                        <button onClick={() => {
-                            props.removeTask(t.id)
-                        }
-                        }>X
-                        </button>
+                        <Button className="btn btn-outline-danger btn-sm" type="button"
+                                onClick={() => {
+                                    props.removeTask(t.id)
+                                }
+                                }>X
+                        </Button>
                     </li>
                 })
             }
