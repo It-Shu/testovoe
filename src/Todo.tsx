@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from "react";
+import React, {useState} from "react";
 import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -21,7 +21,7 @@ export const Todo = (props: TodoPropsType) => {
     const [taskTitle, setTaskTitle] = useState('')
 
     // Функция сохранения title  из инпута в Локальный Стейт
-    const onChangeTaskTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeTaskTitle = (event: React.ChangeEvent<HTMLInputElement>/*ChangeEvent<HTMLInputElement>*/) => {
         setTaskTitle(event.currentTarget.value)
     }
     // Функция добавление таски и затирание инпута после добавления
@@ -30,41 +30,49 @@ export const Todo = (props: TodoPropsType) => {
         setTaskTitle('')
     }
     // Функция добавления таски с помощью клавиши Enter
-    const onKeyPressAddTask = (event: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyPressAddTask = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") addTask()
     }
 
-    return <div>
-        <div>
-            <h1>{props.title}</h1>
+    return <div className='card-body w-50'>
 
-            <input className="col-form-label-sm"
-                   placeholder={'task title'}
-                   value={taskTitle}
-                   onChange={onChangeTaskTitle}
-                   onKeyPress={onKeyPressAddTask}
+        <h1>{props.title}</h1>
+        <div className='input-group mb-2'>
+            <input
+                type="text"
+                className="col-form-label -sm"
+                placeholder={'task title'}
+                value={taskTitle}
+                onChange={onChangeTaskTitle}
+                onKeyPress={onKeyPressAddTask}
             />
 
             <Button
-                className="btn btn-outline-success" type="button"
+                type="button" className="btn btn-outline-warning"
                 onClick={addTask}>ADD</Button>
         </div>
+
         <ul>
             {/*Мапом создаем новый массив тасок и возвращием в виде title и кнопки удалить*/}
             {
                 props.tasks.map(t => {
-                    return <li key={t.id}>
-                    <span onClick={() => {
-                        // props.changeTaskStatus(t.isDone)
-                    }
-                    }>{t.title}</span>
-                        <Button className="btn btn-outline-danger btn-sm" type="button"
-                                onClick={() => {
-                                    props.removeTask(t.id)
-                                }
-                                }>X
-                        </Button>
-                    </li>
+                    return <div key={t.id}>
+                        <div className="custom-control custom-checkbox">
+                            <input type="checkbox" className="custom-control-input" id={t.title}/>
+                            <label className="custom-control-label" htmlFor={t.title}>{t.title}</label>
+                            {/* <span className="form-check-label"  onClick={() => {
+                            // props.changeTaskStatus(t.isDone)
+                        }
+                        }>{t.title}</span>*/}
+
+                            <Button className="btn btn-outline-danger btn-sm" type="button"
+                                    onClick={() => {
+                                        props.removeTask(t.id)
+                                    }
+                                    }>X
+                            </Button>
+                        </div>
+                    </div>
                 })
             }
         </ul>

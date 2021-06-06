@@ -14,16 +14,17 @@ function App() {
         setTask(newTasksList)
     }
 
-    // Функция добавление таски
+    // Функция добавление таски, при условии длинны title больше или равно 1 и меньше или равное 5 символам
     const addTask = (taskTitle: string) => {
         let newTask: TaskType = {id: v1(), title: taskTitle, isDone: false};
-        setTask([newTask, ...task])
+        if (newTask.title.length >= 1 && newTask.title.length <= 5) setTask([newTask, ...task])
+
     }
 
     return (
         <div>
             <Todo
-                title={'My Travel List'}
+                title={'TODO'}
                 tasks={task}
                 removeTask={removeTasks}
                 addTask={addTask}
