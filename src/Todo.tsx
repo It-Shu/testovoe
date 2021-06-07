@@ -21,20 +21,25 @@ export const Todo = (props: TodoPropsType) => {
     const [taskTitle, setTaskTitle] = useState('')
 
     // Функция сохранения title  из инпута в Локальный Стейт
-    const onChangeTaskTitle = (event: React.ChangeEvent<HTMLInputElement>/*ChangeEvent<HTMLInputElement>*/) => {
+    const onChangeTaskTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value)
     }
-    // Функция добавление таски и затирание инпута после добавления
+
+    // Функция добавление таски без пробелов и затирание инпута после добавления
     const addTask = () => {
-        props.addTask(taskTitle)
-        setTaskTitle('')
+        if (taskTitle.trim() !== '') {
+            props.addTask(taskTitle.trim())
+            setTaskTitle('')
+        }
     }
+
     // Функция добавления таски с помощью клавиши Enter
     const onKeyPressAddTask = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") addTask()
     }
 
-    return <div className='card-body w-50'>
+
+    return <div className='card-body'>
 
         <h1>{props.title}</h1>
         <div className='input-group mb-2'>
@@ -56,20 +61,30 @@ export const Todo = (props: TodoPropsType) => {
             {/*Мапом создаем новый массив тасок и возвращием в виде title и кнопки удалить*/}
             {
                 props.tasks.map(t => {
+
+                   /* const onChangeTaskStatus = (event: React.MouseEvent<HTMLSpanElement>) => {
+                        if (event.currentTarget.id) {
+                            return console.log(t.isDone, "Status Changed")
+                        }
+                    }*/
+
+                    const onClickRemoveTask = () => {
+                        props.removeTask(t.id)
+                    }
+
                     return <div key={t.id}>
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id={t.title}/>
-                            <label className="custom-control-label" htmlFor={t.title}>{t.title}</label>
-                            {/* <span className="form-check-label"  onClick={() => {
-                            // props.changeTaskStatus(t.isDone)
-                        }
-                        }>{t.title}</span>*/}
+                           {/* <input type="checkbox" className="custom-control-input" id={t.title}/>
+                            <label className="custom-control-label" htmlFor={t.title}>{t.title}</label>*/}
+                            {/*<input type="checkbox"/>
+                            <span className="form-check-label" id={t.title}
+                                  onClick={onChangeTaskStatus}>{t.title}</span>*/}
+                            <input type="checkbox" id={t.title}/><label htmlFor={t.title}>
+                            {t.title} </label>
 
                             <Button className="btn btn-outline-danger btn-sm" type="button"
-                                    onClick={() => {
-                                        props.removeTask(t.id)
-                                    }
-                                    }>X
+                                    onClick={onClickRemoveTask}
+                            >X
                             </Button>
                         </div>
                     </div>
