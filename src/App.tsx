@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TaskType, Todo} from "./Todo";
 import {v1} from "uuid";
+import {Grid, Paper} from "@material-ui/core";
 
 
 function App() {
@@ -22,14 +23,16 @@ function App() {
 
 
     return (
-        <div>
+        <Grid item >
+            <Paper elevation={7} style={{margin: "auto" ,padding: "40px", width: "280px"}}>
             <Todo
                 title={'TODO'}
                 tasks={tasks}
                 removeTask={removeTasks}
                 addTask={addTask}
             />
-        </div>
+            </Paper>
+        </Grid>
     );
 }
 
