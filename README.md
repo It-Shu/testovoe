@@ -42,8 +42,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ![App](src/img/TodoTitle.jpg)
 
 >2. to add task use the button "ADD"
-> 
-> you can`t add task if task title length more 5 symbols or equal 0
+>
+>> you can`t add task if task title length more 5 symbols or equal 0
 
 ![App](src/img/TodoAdd.jpg)
 
