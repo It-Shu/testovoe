@@ -22,9 +22,7 @@ export const Todo = (props: TodoPropsType) => {
 
     // Функция сохранения title  из инпута в Локальный Стейт
     const onChangeTaskTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (taskTitle !== event.currentTarget.value) {
             setTaskTitle(event.currentTarget.value)
-        }
     }
 
     // Функция добавление таски без пробелов и затирание инпута после добавления
