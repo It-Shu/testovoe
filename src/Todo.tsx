@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Delete} from "@material-ui/icons";
-import {Button, IconButton, TextField} from "@material-ui/core";
+import {Button, Checkbox, IconButton, TextField} from "@material-ui/core";
 
 export type TaskType = {
     id: string
@@ -53,7 +53,7 @@ export const Todo = (props: TodoPropsType) => {
 
             <Button
                 type="button"
-                color="secondary"
+                color="primary"
                 onClick={addTask}>ADD</Button>
         </div>
 
@@ -62,32 +62,20 @@ export const Todo = (props: TodoPropsType) => {
             {
                 props.tasks.map(t => {
 
-                     const onChangeTaskStatus = (event: React.MouseEvent<HTMLSpanElement>) => {
-                         if (event.currentTarget.id) {
-                             return console.log(t.isDone, "Status Changed")
-                         }
-                     }
-
                     const onClickRemoveTask = () => {
                         props.removeTask(t.id)
                     }
 
                     return <div key={t.id}>
                         <div>
-                            {/* <input type="checkbox" className="custom-control-input" id={t.title}/>
-                            <label className="custom-control-label" htmlFor={t.title}>{t.title}</label>*/}
-                            {/*<input type="checkbox"/>
-                            <span className="form-check-label" id={t.title}
-                                  onClick={onChangeTaskStatus}>{t.title}</span>*/}
-                            <input type="checkbox" id={t.title}/><label htmlFor={t.title}>
-                            {t.title} </label>
 
-                            {/*<Button className="btn btn-outline-danger btn-sm" type="button"
-                                    onClick={onClickRemoveTask}
-                            >X
-                            </Button>*/}
+                            <Checkbox
+                                color="primary"
+                                id={t.title}
+                            /><label htmlFor={t.title}>{t.title}</label>
+
                             <IconButton onClick={onClickRemoveTask}>
-                                <Delete/>
+                                <Delete color="secondary"/>
                             </IconButton>
                         </div>
                     </div>
