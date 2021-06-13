@@ -1,0 +1,10 @@
+version: "3"
+services:
+  react-todo:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src:ro
+    environment:
+      - CHOKIDAR_USEPOLLING=true
