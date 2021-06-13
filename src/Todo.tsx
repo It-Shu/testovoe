@@ -71,8 +71,8 @@ export const Todo = (props: TodoPropsType) => {
 
                             <Checkbox
                                 color="primary"
-                                id={t.title}
-                            /><label htmlFor={t.title}>{t.title}</label>
+                                id={t.id}
+                            /><label htmlFor={t.id}>{t.title}</label>
 
                             <IconButton onClick={onClickRemoveTask}>
                                 <Delete color="secondary"/>
