@@ -6,6 +6,19 @@
 [Todo](https://github.com/It-Shu/testovoe)
 > 2. Open the project with some code editor
 ***
+
+# If yor use a Docker: 
+
+>Open a docker-compose.yml file
+> 
+> > Run the docker compose
+> >
+> >![App](src/img/docker_compose.jpg)
+> 
+> Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+
+# For developer mode:
 ## To install and save in your package.json dependencies, run:
 _with yarn:_
 ```
